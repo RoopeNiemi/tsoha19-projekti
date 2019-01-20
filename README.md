@@ -1,6 +1,6 @@
 # Keskustelufoorumi
 Tietokantasovellus-kurssia varten tehty projekti. Aiheena keskustelufoorumi, johon pystyy kirjautumaan sisään, ja sisäänkirjautumisen jälkeen pystyy
-listaamaan, lukemaan, kirjoittamaan, kommentoimaan viestiketjuja. Lisäksi tarkoitus lisätä toiminnallisuus etsiä jonkin, esim aiheen tai kirjoittajan nimen perusteella. 
+listaamaan, lukemaan, kirjoittamaan, kommentoimaan viestiketjuja. Lisäksi tarkoitus lisätä toiminnallisuus etsiä jonkin, esim aiheen tai kirjoittajan nimen perusteella.  
 
 
 Tämänhetkinen versio löytyy 

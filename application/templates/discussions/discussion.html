@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form action="{{url_for('discussions_index')}}" method="GET">
+    <button type="submit"> &lt;-- Back to discussions</button>
+</form>
+<h2>{{discussion.title}}, created {{discussion.date_created}}</h2>
+<h3>Comments</h3>
+  <table>
+    <tr>
+      <th>User</th>
+      <th>Comment</th>
+      <th>Time</th>
+    </tr>
+    {% for comment in comments %}
+    <tr>
+      <td><p>{{comment.account_username}}</p></td>
+      <td>{{comment.message_content}}</td>
+      <td>{{comment.message_date_created}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% if current_user.is_authenticated %}
+  <form method="POST" action="{{ url_for('discussions_comment', discussion_id=discussion.id) }}">
+        <table>
+          <tr>
+            <td>
+          {{ form.comment.label }}
+            </td>
+            <td>
+          {{ form.comment }}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+          <input type="submit" value="Add comment"/>
+            </td>
+          </tr>
+        </table>
+  {% else %}
+  <p>Please login to comment</p>>
+  {% endif %}
+  
+{% endblock %}

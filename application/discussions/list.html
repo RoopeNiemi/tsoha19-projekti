@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Started</th>
+      <th>Title</th>
+    </tr>
+    {% for discussion in discussions %}
+    <tr>
+      <td>{{discussion.date_created}}</td>
+      <td><a href="{{url_for('discussions_show', discussion_id = discussion.id )}}">{{ discussion.title }}</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
