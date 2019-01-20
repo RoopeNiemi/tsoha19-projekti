@@ -26,5 +26,8 @@
 	<input type="submit" value="Register"/>
       </td>
     </tr>
+  </table>
 </form>
+<a href="{{ url_for('auth_login') }}">Login</a>
+<a href="{{url_for('discussions_index')}}">Show discussions</a>
 {% endblock %}

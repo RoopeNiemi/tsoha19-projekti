@@ -13,7 +13,10 @@ def index():
 
 @app.route("/discussions", methods=["GET"])
 def discussions_index():
-    return render_template("discussions/list.html", discussions=Discussion.query.all())
+    stmt = text("SELECT Account.username AS account_username, Discussion.id as id, Discussion.title as title, Discussion.date_created as date_created "
+    "FROM Account, Discussion WHERE Account.id = Discussion.account_id ORDER BY date_created desc")
+    discussions = db.engine.execute(stmt)
+    return render_template("discussions/list.html", discussions=discussions)
 
 @app.route("/discussions/new")
 @login_required

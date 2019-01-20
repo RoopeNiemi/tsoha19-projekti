@@ -2,7 +2,7 @@
 
 {% block body %}
 {{ error }}
-<h2>Please login to access the forum</h2>
+<h2>Login to your account</h2>
 <form method="POST" action="{{ url_for('auth_login') }}">
   <table>
     <tr>
@@ -28,5 +28,6 @@
     </tr>
   </table>
 </form>
-<form method="GET" action="{{ url_for('auth_register') }}"><input type="submit" value="register"/></form>
+<a href="{{ url_for('auth_register') }}">Register</a>
+<a href="{{url_for('discussions_index')}}">Show discussions</a>
 {% endblock %}

@@ -1,3 +1,6 @@
 application/__pycache__
+application/discussions/__pycache__
+application/messages/__pycache__
+application/auth/__pycache__
 venv
 application/forum.db

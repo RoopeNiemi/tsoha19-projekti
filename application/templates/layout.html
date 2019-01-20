@@ -6,6 +6,7 @@
   </head>
   
   <body>
+    <h1>Forums</h1>
     {% if current_user.is_authenticated %}
     <p>
       Kirjautunut nimellä {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
