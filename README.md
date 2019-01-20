@@ -5,4 +5,4 @@ listaamaan, lukemaan, kirjoittamaan, kommentoimaan viestiketjuja. Lisäksi tarko
 
 Tämänhetkinen versio löytyy 
 [täältä](https://murmuring-fortress-85968.herokuapp.com/auth/login).
-Tämän hetken toiminnallisuutena ainoastaan käyttäjän rekisteröinti, sisään -ja uloskirjautuminen.
+Tämän hetken toiminnallisuutena ainoastaan käyttäjän rekisteröinti, sisään -ja uloskirjautuminen. 
