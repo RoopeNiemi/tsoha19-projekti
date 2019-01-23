@@ -13,15 +13,15 @@ app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
 
-from application.auth import models
-from application.discussions import models
+from application.auth import models, views
+from application.discussions import models, views
 from application.messages import models
 
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
-from application.auth import views
+from application.user import views
 
 from flask_login import LoginManager
 login_manager = LoginManager()

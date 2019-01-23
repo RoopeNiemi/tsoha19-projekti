@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{{ error }}
 <h1>Register a new user</h1>
 <form method="POST" action="{{ url_for('auth_register') }}">
   <table>
@@ -22,12 +21,18 @@
       </td>
     </tr>
     <tr>
+        <td>
+    {{ form.repeat_password.label }}
+        </td>
+        <td>
+    {{ form.repeat_password }}
+        </td>
+      </tr>
+    <tr>
       <td colspan="2">
 	<input type="submit" value="Register"/>
       </td>
     </tr>
   </table>
 </form>
-<a href="{{ url_for('auth_login') }}">Login</a>
-<a href="{{url_for('discussions_index')}}">Show discussions</a>
 {% endblock %}

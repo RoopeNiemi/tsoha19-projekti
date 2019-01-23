@@ -1,9 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form action="{{url_for('discussions_index')}}" method="GET">
-    <button type="submit"> Show discussions</button>
-</form>
 <h2>{{discussion.title}}, created {{discussion.date_created}}</h2>
 <h3>Comments</h3>
   <table>
@@ -38,7 +35,7 @@
           </tr>
         </table>
   {% else %}
-  <p>Please login to comment</p>
+  <p>Please login to comment.</p>
   {% endif %}
   
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>Delete your account</h1>
+<form method="POST" action="{{ url_for('delete_user', user_id = current_user.id) }}">
+    <p>Enter your password and press "Delete" to delete your account.</p>
+    <p>This will delete your account permanently.</p>
+  <table>
+    <tr>
+      <td>
+	{{ form.password.label }}
+      </td>
+      <td>
+	{{ form.password }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+	<input type="submit" value="Delete"/>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

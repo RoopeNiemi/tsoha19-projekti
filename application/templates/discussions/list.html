@@ -4,21 +4,21 @@
 {% if current_user.is_authenticated %}
 <a href="{{url_for('discussions_form')}}">Create post </a>
 {% else %} 
-<a href="{{url_for('auth_login')}}">Login</a>
-<a href="{{url_for('auth_register')}}">Register</a>
 
 {% endif %}
   <table>
     <tr>
-      <th>Started</th>
-      <th>Title</th>
       <th>By</th>
+      <th>Title</th>
+      <th>Latest message</th>
+      <th>Messages</th>
     </tr>
     {% for discussion in discussions %}
     <tr>
-      <td>{{discussion.date_created}}</td>
-      <td><a href="{{url_for('discussions_show', discussion_id = discussion.id )}}">{{ discussion.title }}</a></td>
-      <td>{{discussion.account_username}}</td>
+      <td>{{discussion.username}}</td>
+      <td><a href="{{url_for('discussions_show', discussion_id = discussion.d_id )}}">{{ discussion.title }}</a></td>
+      <td>{{discussion.latest_message}}</td>
+      <td>{{discussion.totalmessages}}</td>
     </tr>
     {% endfor %}
   </table>

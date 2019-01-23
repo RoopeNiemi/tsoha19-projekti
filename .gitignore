@@ -4,3 +4,4 @@ application/messages/__pycache__
 application/auth/__pycache__
 venv
 application/forum.db
+application/user/__pycache__

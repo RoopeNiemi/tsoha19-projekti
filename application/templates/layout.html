@@ -2,19 +2,23 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Keskustelufoorumi</title>
+    <title>Tsoha-forums</title>
   </head>
   
   <body>
     <h1>Forums</h1>
+    <p>{{ error }}</p>
     {% if current_user.is_authenticated %}
     <p>
-      Kirjautunut nimellä {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
+      Logged in as user {{ current_user.username }}. <a href="{{ url_for('auth_logout') }}">Logout</a>
+      <a href="{{url_for('user_page', user_id = current_user.id)}}">My profile</a>    <a href="{{url_for('discussions_index')}}">Discussions</a>
     </p>
     </p>
     {% else %}
+    <a href="{{url_for('discussions_index')}}">Discussions</a>
+    <a href="{{url_for('auth_login')}}">Login</a>
+    <a href="{{url_for('auth_register')}}">Register</a>
     {% endif %}
-    
     {% block body %}
     <p>
 Content.
