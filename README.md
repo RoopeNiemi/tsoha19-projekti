@@ -5,4 +5,7 @@ listaamaan, lukemaan, kirjoittamaan, kommentoimaan viestiketjuja. Lisäksi tarko
 
 Tämänhetkinen versio löytyy 
 [täältä](https://murmuring-fortress-85968.herokuapp.com/auth/login).
-Tämän hetken toiminnallisuutena  käyttäjän rekisteröinti, sisään -ja uloskirjautuminen, sekä kaikkien keskustelujen listaaminen, yksittäisten keskustelujen näyttäminen ja kommentointi. 
+Tämän hetken toiminnallisuus: 
+Käyttäjän rekisteröinti, sisään -ja uloskirjautuminen. Lisäksi käyttäjä pystyy vaihtamaan salasanansa, ja poistamaan koko käyttäjän. Käyttäjä pystyy tarkastelemaan omaa profiiliaan, profiilisivulla tällä hetkellä käyttäjänimi, aika jolloin käyttäjä luotu, käyttäjän viestien määrä, sekä linkit käyttäjän poistoon sekä salasanan vaihtoon.
+
+Kaikkien keskustelujen listaaminen, yksittäisten keskustelujen näyttäminen ja kommentointi. Keskustelujen listaaminen tapahtuu tällä etkellä viimeisen viestin mukaan (ketju jossa viimeisin viesti on ylimpänä). Ketjun viestien määrä näkyy myös listaussivulla. 
