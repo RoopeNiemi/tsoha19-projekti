@@ -19,8 +19,8 @@ def user_page(user_id):
     stmt = text("select Account.username, Account.id, Account.date_created, "
     "count(Message.id) as total_messages from Message, Account where Message.account_id = Account.id AND Account.id = :id").params(id = current_user.id)
 
-    db.engine.execute(stmt).fetchone()
-    return render_template("user/userpage.html", user = current_user)
+    user=db.engine.execute(stmt).fetchone()
+    return render_template("user/userpage.html", user = user)
 
 
 @app.route("/user/<user_id>/change", methods=["POST"])
