@@ -3,12 +3,15 @@ app = Flask(__name__)
 
 from flask_sqlalchemy import SQLAlchemy
 
+import os
 
 import bcrypt
 
-
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///forum.db"
-app.config["SQLALCHEMY_ECHO"] = True
+if os.environ.get("HEROKU"):
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///forum.db"    
+    app.config["SQLALCHEMY_ECHO"] = True
 
 db = SQLAlchemy(app)
 
