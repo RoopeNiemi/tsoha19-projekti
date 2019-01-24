@@ -14,10 +14,10 @@ def index():
 @app.route("/discussions", methods=["GET"])
 def discussions_index():
     stmt = text("SELECT Account.username as username, Discussion.id as d_id, "
-    "Discussion.title as title, Discussion.date_created as d_date_created, "
-    "count(Message.id) as totalmessages, max(Message.date_created) as latest_message from Message, Discussion, "
-    "Account where Account.id = Discussion.account_id AND Message.discussion_id = Discussion.id "
-    "GROUP BY Discussion.title ORDER BY latest_message DESC")
+                "Discussion.title as title, Discussion.date_created as d_date_created, " 
+                "count(Message.id) as totalmessages, max(Message.date_created) as latest_message from Message, Discussion, " 
+                "Account where Account.id = Discussion.account_id AND Message.discussion_id = Discussion.id "
+                "GROUP BY Discussion.title, Account.username, Discussion.id ORDER BY latest_message DESC")
     discussions = db.engine.execute(stmt)
     return render_template("discussions/list.html", discussions=discussions)
 

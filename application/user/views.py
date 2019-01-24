@@ -18,7 +18,7 @@ def user_page(user_id):
     except:
         return abort(404)
     stmt = text("select Account.username, Account.id, Account.date_created, "
-    "count(Message.id) as total_messages from Message, Account where Message.account_id = Account.id AND Account.id = :id").params(id = current_user.id)
+    "count(Message.id) as total_messages from Message, Account where Message.account_id = Account.id AND Account.id = :id GROUP BY Account.username, Account.id").params(id = current_user.id)
 
     user=db.engine.execute(stmt).fetchone()
     return render_template("user/userpage.html", user = user)

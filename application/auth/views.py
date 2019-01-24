@@ -10,6 +10,8 @@ from application.discussions import views
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():
+    if current_user.is_authenticated:
+        return redirect(url_for("discussions_index"))
     if request.method == "GET":
         return render_template("auth/loginform.html", form = UsernameAndPasswordForm())
 
@@ -31,13 +33,18 @@ def auth_logout():
 
 @app.route("/auth/register", methods=["GET", "POST"])
 def auth_register():
+    if current_user.is_authenticated:
+        return redirect(url_for("discussions_index"))
     if request.method == "GET":
         return render_template("auth/registerform.html", form = CreateUserNamePasswordForm())
         
     form = CreateUserNamePasswordForm(request.form)
     if not form.validate_form():
         return "no"
-    user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()))
-    db.session().add(user)
-    db.session().commit()
-    return render_template("auth/loginform.html", form = UsernameAndPasswordForm())
+    try:
+        user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()))
+        db.session().add(user)
+        db.session().commit()
+        return render_template("auth/loginform.html", form = UsernameAndPasswordForm())
+    except:
+        return render_template("auth/registerform.html", form = CreateUserNamePasswordForm(), error = "Username already exists, please choose another one")
