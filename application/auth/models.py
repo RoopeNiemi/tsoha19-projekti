@@ -41,4 +41,4 @@ class User(db.Model):
 
     
     def is_correct_password(self, plaintext):
-        return bcrypt.checkpw(plaintext, self._password)
+        return bcrypt.checkpw(plaintext, self._password.encode('utf8'))
