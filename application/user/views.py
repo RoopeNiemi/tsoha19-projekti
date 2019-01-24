@@ -44,12 +44,12 @@ def update_password(user_id):
     user = db.engine.execute(stmt).fetchone()
 
     # Compare given old password to password in database
-    if not bcrypt.checkpw(form.old_password.data.encode('utf8'), user._password):
+    if not bcrypt.checkpw(form.old_password.data.encode('utf8'), user._password.encode('utf8')):
         return render_template("auth/userpage.html", form = form,
                            error = "Wrong old password", user=current_user)
 
     # Hash new password and update user's password in database
-    pwd = bcrypt.hashpw(form.new_password.data.encode('utf8'), bcrypt.gensalt())
+    pwd = bcrypt.hashpw(form.new_password.data.encode('utf8'), bcrypt.gensalt()).decode('utf8')
     stmt=text("UPDATE Account SET _password = :new, date_modified = current_timestamp WHERE Account.id = :id").params(new=pwd, id=current_user.id)
     user=db.engine.execute(stmt)
 
@@ -83,7 +83,7 @@ def delete_user(user_id):
     # Confirm password before delete
     stmt=text("SELECT*FROM Account WHERE Account.id = :id").params(id=current_user.id)
     user = db.engine.execute(stmt).fetchone()
-    if not bcrypt.checkpw(form.password.data.encode('utf8'), user._password):
+    if not bcrypt.checkpw(form.password.data.encode('utf8'), user._password.encode('utf8')):
         return render_template("user/deleteuser.html", form = PasswordForm(), error = "Wrong password.")
     
     # Delete related discussions

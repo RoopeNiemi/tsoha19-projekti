@@ -18,7 +18,7 @@ def auth_login():
     form = UsernameAndPasswordForm(request.form)
 
     user = User.query.filter_by(username=form.username.data).first()
-    if not user or not user.is_correct_password(form.password.data.encode('utf8')):
+    if not user or not user.is_correct_password(form.password.data):
         return render_template("auth/loginform.html", form = form,
                            error = "Wrong username or password")
     else:
@@ -42,7 +42,7 @@ def auth_register():
     if not form.validate_form():
         return "no"
     try:
-        user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()))
+        user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()).decode('utf8'))
         db.session().add(user)
         db.session().commit()
         return render_template("auth/loginform.html", form = UsernameAndPasswordForm())

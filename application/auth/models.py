@@ -35,10 +35,6 @@ class User(db.Model):
     def password(self):
         return self._password
 
-    @password.setter
-    def set_password(self, plaintext):
-        self._password = bcrypt.hashpw(plaintext, bcrypt.gensalt())
-
     
     def is_correct_password(self, plaintext):
-        return bcrypt.checkpw(plaintext, self._password.encode('utf8'))
+        return bcrypt.checkpw(plaintext.encode('utf8'), self._password.encode('utf8'))
