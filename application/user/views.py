@@ -1,8 +1,9 @@
 from flask import render_template, request, redirect, url_for, abort, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy.sql import text
+import bcrypt
 
-from application import app, db, bcrypt
+from application import app, db
 from application.auth.models import User
 from application.auth.forms import UsernameAndPasswordForm,UpdatePasswordForm, PasswordForm
 from application.discussions import views
@@ -43,12 +44,12 @@ def update_password(user_id):
     user = db.engine.execute(stmt).fetchone()
 
     # Compare given old password to password in database
-    if not bcrypt.check_password_hash(user._password, form.old_password.data):
+    if not bcrypt.checkpw(form.old_password.data.encode('utf8'), user._password):
         return render_template("auth/userpage.html", form = form,
                            error = "Wrong old password", user=current_user)
 
     # Hash new password and update user's password in database
-    pwd = bcrypt.generate_password_hash(form.new_password.data)
+    pwd = bcrypt.hashpw(form.new_password.data.encode('utf8'), bcrypt.gensalt())
     stmt=text("UPDATE Account SET _password = :new, date_modified = current_timestamp WHERE Account.id = :id").params(new=pwd, id=current_user.id)
     user=db.engine.execute(stmt)
 
@@ -82,7 +83,7 @@ def delete_user(user_id):
     # Confirm password before delete
     stmt=text("SELECT*FROM Account WHERE Account.id = :id").params(id=current_user.id)
     user = db.engine.execute(stmt).fetchone()
-    if not bcrypt.check_password_hash(user._password, form.password.data):
+    if not bcrypt.checkpw(form.password.data.encode('utf8'), user._password):
         return render_template("user/deleteuser.html", form = PasswordForm(), error = "Wrong password.")
     
     # Delete related discussions

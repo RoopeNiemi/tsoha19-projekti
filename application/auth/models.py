@@ -1,5 +1,5 @@
 from sqlalchemy.ext.hybrid import hybrid_property
-from application import bcrypt
+import bcrypt
 from application import db
 
 class User(db.Model):
@@ -37,8 +37,8 @@ class User(db.Model):
 
     @password.setter
     def set_password(self, plaintext):
-        self._password = bcrypt.generate_password_hash(plaintext)
+        self._password = bcrypt.hashpw(plaintext, bcrypt.gensalt())
 
     
     def is_correct_password(self, plaintext):
-        return bcrypt.check_password_hash(self._password, plaintext)
+        return bcrypt.checkpw(plaintext.encode('utf8'), self._password)

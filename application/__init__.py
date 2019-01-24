@@ -4,9 +4,8 @@ app = Flask(__name__)
 from flask_sqlalchemy import SQLAlchemy
 
 
-from flask_bcrypt import Bcrypt
+import bcrypt
 
-bcrypt = Bcrypt(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///forum.db"
 app.config["SQLALCHEMY_ECHO"] = True

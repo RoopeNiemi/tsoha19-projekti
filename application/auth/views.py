@@ -2,7 +2,8 @@ from flask import render_template, request, redirect, url_for, abort, flash
 from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy.sql import text
 
-from application import app, db, bcrypt
+from application import app, db
+import bcrypt
 from application.auth.models import User
 from application.auth.forms import UsernameAndPasswordForm,UpdatePasswordForm, PasswordForm, CreateUserNamePasswordForm
 from application.discussions import views
@@ -36,7 +37,7 @@ def auth_register():
     form = CreateUserNamePasswordForm(request.form)
     if not form.validate_form():
         return "no"
-    user = User(username=form.username.data, password = bcrypt.generate_password_hash(form.password.data))
+    user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()))
     db.session().add(user)
     db.session().commit()
     return render_template("auth/loginform.html", form = UsernameAndPasswordForm())
