@@ -18,7 +18,7 @@ def auth_login():
     form = UsernameAndPasswordForm(request.form)
 
     user = User.query.filter_by(username=form.username.data).first()
-    if not user or not user.is_correct_password(form.password.data):
+    if not user or not user.is_correct_password(form.password.data.encode('utf8')):
         return render_template("auth/loginform.html", form = form,
                            error = "Wrong username or password")
     else:
