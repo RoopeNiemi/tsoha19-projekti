@@ -17,3 +17,10 @@
    As an authenticated user I can change my password
    
    As an authenticated user I can delete my account permanently
+   
+   As an authenticated user I can delete my comments on any discussion
+   
+   As an authenticated user I can edit my comments
+   
+   As an authenticated user I can delete discussions I have started
+   
