@@ -15,7 +15,7 @@ class CommentForm(FlaskForm):
     comment = TextAreaField("Comment")
     
     def validate_form(self):
-        if len(self.comment.data.split()) <= 300:
+        if len(self.comment.data.split()) <= 300 and len(self.comment.data)< 0:
             return True
 
         return False

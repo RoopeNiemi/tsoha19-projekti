@@ -45,7 +45,7 @@ def update_password(user_id):
 
     # Compare given old password to password in database
     if not bcrypt.checkpw(form.old_password.data.encode('utf8'), user._password.encode('utf8')):
-        return render_template("auth/userpage.html", form = form,
+        return render_template("user/userpage.html", form = form,
                            error = "Wrong old password", user=current_user)
 
     # Hash new password and update user's password in database
@@ -53,7 +53,7 @@ def update_password(user_id):
     stmt=text("UPDATE Account SET _password = :new, date_modified = current_timestamp WHERE Account.id = :id").params(new=pwd, id=current_user.id)
     user=db.engine.execute(stmt)
 
-    return render_template("user/userpage.html", error = "Password updated", user=user, form = UpdatePasswordForm())
+    return render_template("user/changepasswordform.html", success = "Password updated.", user=current_user, form = UpdatePasswordForm())
 
 
 
@@ -86,12 +86,12 @@ def delete_user(user_id):
     if not bcrypt.checkpw(form.password.data.encode('utf8'), user._password.encode('utf8')):
         return render_template("user/deleteuser.html", form = PasswordForm(), error = "Wrong password.")
     
-    # Delete related discussions
-    stmt=text("DELETE FROM Discussion WHERE Discussion.account_id = :id").params(id=current_user.id)
-    db.engine.execute(stmt)
-
     # Delete related messages
     stmt=text("DELETE FROM Message WHERE Message.account_id = :id").params(id=current_user.id)
+    db.engine.execute(stmt)
+
+    # Delete related discussions
+    stmt=text("DELETE FROM Discussion WHERE Discussion.account_id = :id").params(id=current_user.id)
     db.engine.execute(stmt)
 
     # Delete account
@@ -101,7 +101,7 @@ def delete_user(user_id):
 
     logout_user()
 
-    return render_template("auth/loginform.html", error = "Account successfully deleted.", form = UsernameAndPasswordForm())
+    return render_template("auth/loginform.html", success = "Account successfully deleted.", form = UsernameAndPasswordForm())
 
 @app.route("/user/<user_id>/change", methods=["GET"])
 @login_required

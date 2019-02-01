@@ -1,4 +1,6 @@
 from application import db
+from datetime import datetime
+
 
 class Discussion(db.Model):
     id = db.Column(db.Integer, primary_key=True)

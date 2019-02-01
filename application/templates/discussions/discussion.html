@@ -3,37 +3,48 @@
 {% block body %}
 <h2>{{discussion.title}}, created {{discussion.date_created}}</h2>
 <h3>Comments</h3>
-  <table>
-    <tr>
-      <th>User</th>
-      <th>Comment</th>
-      <th>Time</th>
-    </tr>
+<div class="table">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <th scope="col">User</th>
+      <th scope="col">Comment</th>
+      <th scope="col">Time</th>
+    </thead>
+    <tbody>
     {% for comment in comments %}
     <tr>
-      <td><p>{{comment.account_username}}</p></td>
-      <td>{{comment.message_content}}</td>
-      <td>{{comment.message_date_created}}</td>
+      <td>{{comment.account_username}}</td>
+      <td style="word-break:break-all">{{comment.message_content}}</td>
+      <td>{{comment.message_date_created}}<br>
+        {% if comment.message_date_created != comment.message_date_modified %}
+        <p>Edited: {{comment.message_date_modified}}</p>
+        {% endif %}
+        {% if current_user.is_authenticated and current_user.id == comment.a_id %}
+        <a href="{{url_for('discussions_edit_message_page', discussion_id=discussion.id, message_id=comment.m_id)}}">Edit</a>
+        <form method="POST" action="{{ url_for('discussions_delete_message', discussion_id=discussion.id, message_id=comment.m_id) }}">
+            <input type="submit" value="Delete"/>
+          </form>
+        {% endif %}
+  
+      </td>
     </tr>
     {% endfor %}
+  </tbody>
   </table>
+  </div>
   {% if current_user.is_authenticated %}
   <form method="POST" action="{{ url_for('discussions_comment', discussion_id=discussion.id) }}">
-        <table>
-          <tr>
-            <td>
-          {{ form.comment.label }}
-            </td>
-            <td>
-          {{ form.comment }}
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2">
+
+
+    <div class="input-group" style="max-width:75%;margin-left:auto;margin-right:auto;margin-bottom:30px; margin-top:30px;">
+      <textarea class="form-control" aria-label="With textarea", id="comment" name="comment" style="border-color:brown;"></textarea>
+        <div class="input-group-append">
           <input type="submit" value="Add comment"/>
-            </td>
-          </tr>
-        </table>
+        </div>
+    </div>            
+  </form>
+
+
   {% else %}
   <p>Please login to comment.</p>
   {% endif %}
