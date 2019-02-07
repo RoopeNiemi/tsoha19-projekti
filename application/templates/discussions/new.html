@@ -5,7 +5,7 @@
 <h2>Create a new post</h2>
 <form method="POST" action="{{ url_for('discussions_create') }}">
   <table>
-    <tr><td>Max 20 words</td></tr>
+    <tr><td>Max 100 characters</td></tr>
     <tr>
       <td>
 	{{ form.title.label }}
@@ -14,7 +14,7 @@
 	{{ form.title }}
       </td>
     </tr>
-    <tr><td>Max 300 words</td></tr>
+    <tr><td>Max 2000 characters</td></tr>
     <tr>
       <td>
 	{{ form.content.label }}

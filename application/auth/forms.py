@@ -1,37 +1,26 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField
-  
-# Could not get validators to work, these are just temporary.
+from wtforms import PasswordField, StringField, validators
+
 class UsernameAndPasswordForm(FlaskForm):
-    username = StringField("Username")
-    password = PasswordField("Password")
-
-    def validate_form(self):
-        if len(self.username.data) < 6 or len(self.password.data) < 8:
-            return False
-
-        return True
+    username = StringField("Username", [validators.DataRequired()])
+    password = PasswordField("Password", [validators.DataRequired()])
 
 class CreateUserNamePasswordForm(FlaskForm):
-    username = StringField("Username")
-    password = PasswordField("Password")
-    repeat_password = PasswordField("Repeat password")
+    username = StringField("Username", [validators.Length(min=6,message='Username must be atleast 6 characters.')])
+    password = PasswordField("Password", [validators.Length(min=8, message='Password must be atleast 8 characters.')])
+    repeat_password = PasswordField("Repeat password", [validators.EqualTo('password', message='Passwords must match')])
 
-    def validate_form(self):
-        if len(self.username.data) < 6 or len(self.password.data) < 8 or self.password.data != self.repeat_password.data:
-            return False
-        return True
+    class Meta:
+        csrf=False
 
 class UpdatePasswordForm(FlaskForm):
     old_password = PasswordField("Old password")
-    new_password = PasswordField("New Password")
-    repeat_new_password = PasswordField("Repeat new password")
+    new_password = PasswordField("New Password", [validators.Length(min=8), validators.EqualTo('repeat_new_password')])
+    repeat_new_password = PasswordField("Repeat new password", [validators.Length(min=8)])
 
 
-    def validate_form(self):
-        if len(self.new_password.data) < 8 or self.new_password.data != self.repeat_new_password.data or len(self.new_password.data) < 8:
-            return False
-        return True
+    class Meta:
+        csrf=False
 
 
 class PasswordForm(FlaskForm):

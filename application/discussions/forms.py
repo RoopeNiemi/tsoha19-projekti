@@ -1,21 +1,15 @@
 from flask_wtf import FlaskForm
-from wtforms import  StringField, TextAreaField
+from wtforms import  StringField, TextAreaField, validators
 
 class DiscussionForm(FlaskForm):
-    title = StringField("Title")
-    content = TextAreaField("Content")
+    title = StringField("Title", [validators.DataRequired(), validators.Length(min=5, max=100)])
+    content = TextAreaField("Content", [validators.Length(min=5, max=2000)])
 
-    def validate_form(self):
-        if len(self.title.data.split()) > 30 or len(self.content.data.split()) > 300:
-            return False
-
-        return True
+    class Meta:
+        csrf=False
 
 class CommentForm(FlaskForm):
-    comment = TextAreaField("Comment")
+    comment = TextAreaField("Comment", [validators.DataRequired(), validators.Length(max=2000)])
     
-    def validate_form(self):
-        if len(self.comment.data.split()) <= 300 and len(self.comment.data)< 0:
-            return True
-
-        return False
+    class Meta:
+        csrf=False

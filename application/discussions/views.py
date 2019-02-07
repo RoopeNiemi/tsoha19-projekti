@@ -34,7 +34,8 @@ def discussions_form():
 @login_required
 def discussions_create():
     form = DiscussionForm(request.form)
-    #TODO: validate input somehow
+    if not form.validate():
+        return render_template("discussions/new.html", form=DiscussionForm(), error = "Title length must be between 5 and 100 characters. Content must be between 5 and 2000 characters.")
     discussion = Discussion(form.title.data)
     discussion.set_account_id(current_user.id)
     db.session().add(discussion)
@@ -78,7 +79,8 @@ def discussions_show(discussion_id):
 @login_required
 def discussions_comment(discussion_id):
     form = CommentForm(request.form)
-    #TODO: validate input somehow
+    if not form.validate():
+        return redirect(url_for("discussions_show", discussion_id = discussion_id))
     message = Message(form.comment.data)
     message.set_account_id(current_user.id)
     message.set_discussion_id(discussion_id)

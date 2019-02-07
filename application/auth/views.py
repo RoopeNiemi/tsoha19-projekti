@@ -39,8 +39,8 @@ def auth_register():
         return render_template("auth/registerform.html", form = CreateUserNamePasswordForm())
         
     form = CreateUserNamePasswordForm(request.form)
-    if not form.validate_form():
-        return "no"
+    if not form.validate():
+        return render_template("auth/registerform.html", error = "Username must be atleast 6 characters. Password must be atleast 8 characters. Passwords must match.", form=CreateUserNamePasswordForm())
     try:
         user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()).decode('utf8'))
         db.session().add(user)
