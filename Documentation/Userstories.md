@@ -7,6 +7,8 @@
    As a user I can register to the website
 
    As a user I can login to the website
+   
+   As a user I can search discussions by their tags
 
    As an authenticated user I can create a new discussion
    
@@ -23,4 +25,12 @@
    As an authenticated user I can edit my comments
    
    As an authenticated user I can delete discussions I have started
+   
+   As an admin user I can delete any discussion
+   
+   As an admin user I can delete any message
+   
+   As an admin user I can view a list of all the users
+   
+   As an admin user I can delete any user
    
