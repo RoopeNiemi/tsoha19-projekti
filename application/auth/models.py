@@ -13,8 +13,9 @@ class User(db.Model):
     username=db.Column(db.String(144), nullable=False, unique=True)
     _password=db.Column(db.String(144), nullable=False)
 
-    discussions = db.relationship("Discussion", backref='account', lazy=True)
-    messages = db.relationship("Message", backref='account', lazy=True)
+    discussions = db.relationship("Discussion", cascade='all', backref='account', lazy=True)
+    messages = db.relationship("Message", cascade='all', backref='account', lazy=True)
+    role=db.Column(db.String(20), default="User",  nullable=False)
     
     def __init__(self, username, password):
         self.username = username

@@ -5,20 +5,13 @@
 <form method="POST" action="{{ url_for('delete_user', user_id = current_user.id) }}">
     <p>Enter your password and press "Delete" to delete your account.</p>
     <p>This will delete your account permanently.</p>
-  <table>
-    <tr>
-      <td>
-	{{ form.password.label }}
-      </td>
-      <td>
-	{{ form.password }}
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-	<input type="submit" value="Delete"/>
-      </td>
-    </tr>
-  </table>
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      <br>
+</div>
+<center>
+<button type="submit" class="btn btn-danger">Delete account</button>
+</center>
 </form>
 {% endblock %}

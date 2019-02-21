@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+{% if current_user.is_authenticated %}
+<form method="GET" action="{{url_for('discussions_form')}}">
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 10px;">Create post</button>
+</form>
+{% else %} 
+
+{% endif %}
+  <table class="table table-light">
+    <thead>
+      <th scope="col">Username</th>
+      <th scope="col"></th>
+    </thead>
+    <tbody>
+    {% for user in users %}
+    <tr>
+      <td><a href="{{url_for('user_page', user_id = user.id )}}">{{ user.username }}</a></td>
+      <td>
+        <form method="POST" action="{{ url_for('delete_user', user_id=user.id) }}">
+            <button type="submit" class="btn btn-warning">Delete</button>
+      </form></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+{% endblock %}

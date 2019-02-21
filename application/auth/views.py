@@ -7,6 +7,7 @@ import bcrypt
 from application.auth.models import User
 from application.auth.forms import UsernameAndPasswordForm,UpdatePasswordForm, PasswordForm, CreateUserNamePasswordForm
 from application.discussions import views
+from application.tags.forms import SearchTagForm
 
 @app.route("/auth/login", methods = ["GET", "POST"])
 def auth_login():

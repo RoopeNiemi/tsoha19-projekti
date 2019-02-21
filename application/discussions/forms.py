@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import  StringField, TextAreaField, validators
 
 class DiscussionForm(FlaskForm):
-    title = StringField("Title", [validators.DataRequired(), validators.Length(min=5, max=100)])
+    title = StringField("Title", [validators.Length(min=5, max=100)])
+    tags = StringField("Tags", [validators.Length(min=3, max=200)])
     content = TextAreaField("Content", [validators.Length(min=5, max=2000)])
 
     class Meta:

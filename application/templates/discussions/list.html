@@ -1,11 +1,19 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<div class="form-inline mt-2 mt-md-0">
 {% if current_user.is_authenticated %}
-<a href="{{url_for('discussions_form')}}">Create post </a>
+<form method="GET" action="{{url_for('discussions_form')}}">
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 10px;">Create post</button>
+</form>
 {% else %} 
 
 {% endif %}
+  <form method="POST" action="{{ url_for('find_discussions_with_tag') }}" style="margin-left:auto">
+      {{searchform.tags}}
+      <button type="submit" class="btn btn-info"style="margin-right: 10px;">Search</button>
+    </form>
+</div>
   <table class="table table-light">
     <thead>
       <th scope="col">By</th>
@@ -17,14 +25,16 @@
     <tbody>
     {% for discussion in discussions %}
     <tr>
-      <th scope="row">{{discussion.username}}</td>
+      <th scope="row">{{discussion.username}}</th>
       <td><a href="{{url_for('discussions_show', discussion_id = discussion.d_id )}}">{{ discussion.title }}</a></td>
       <td>{{discussion.latest_message}}</td>
       <td>{{discussion.totalmessages}}</td>
       <td>
-        {% if current_user.is_authenticated and current_user.id == discussion.a_id %}
+        {% if current_user.is_authenticated and current_user.id == discussion.a_id or current_user.role=='admin'%}
         <form method="POST" action="{{ url_for('discussions_delete', discussion_id=discussion.d_id) }}">
-          <input type="submit" value="Delete"/>
+          <center>
+            <button type="submit" class="btn btn-warning">Delete</button>
+          </center>
         </form>
         {% endif %}
       </td>

@@ -16,9 +16,10 @@ else:
 db = SQLAlchemy(app)
 
 from application.auth import models, views
+from application.tags import views, forms
 from application.discussions import models, views
 from application.messages import models
-
+from application.tags import models
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)

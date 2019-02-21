@@ -4,30 +4,18 @@
 {{ error }}
 <h2>Create a new post</h2>
 <form method="POST" action="{{ url_for('discussions_create') }}">
-  <table>
-    <tr><td>Max 100 characters</td></tr>
-    <tr>
-      <td>
-	{{ form.title.label }}
-      </td>
-      <td>
-	{{ form.title }}
-      </td>
-    </tr>
-    <tr><td>Max 2000 characters</td></tr>
-    <tr>
-      <td>
-	{{ form.content.label }}
-      </td>
-      <td>
-	{{ form.content }}
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-	<input type="submit" value="Start a discussion"/>
-      </td>
-    </tr>
-  </table>
+
+  <div class="form-group">
+      <label for="title">Max 100 characters</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+        <br>
+      <label for="tags">Tags are separated by space</label>
+      <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags">
+  <br>
+  <label for="repeat_new_password">Content</label>
+  <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+<br>
+</div>
+  <button type="submit" class="btn btn-primary">Create post</button>
 </form>
 {% endblock %}
