@@ -14,7 +14,7 @@
   <button type="submit" class="btn btn-info"style="margin-right: 10px;">Search</button>
 </form>
 </div>
-<h1>Discussions with tag {{ tag }}</h1>
+<h1>Discussions with '{{ tag }}' in tag</h1>
   <table class="table table-light">
     <thead>
       <th scope="col">By</th>
@@ -22,14 +22,37 @@
       <th scope="col"></th>
     </thead>
     <tbody>
-    {% for discussion in discussions %}
+    {% for discussion in discussions_by_tag %}
     <tr>
       <th scope="row">{{discussion.username}}</td>
       <td><a href="{{url_for('discussions_show', discussion_id = discussion.id )}}">{{ discussion.title }}</a></td>
       <td>
-        {% if current_user.is_authenticated and current_user.id == discussion.a_id %}
+        {% if current_user.is_authenticated and current_user.id == discussion.account_id %}
         <form method="POST" action="{{ url_for('discussions_delete', discussion_id=discussion.id) }}">
-          <input type="submit" value="Delete"/>
+          <button type="submit" class="btn btn-warning">Delete</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+    <h1>Discussion with '{{ tag }}' in title</h1>
+    <table class="table table-light">
+      <thead>
+        <th scope="col">By</th>
+        <th scope="col">Title</th>
+        <th scope="col"></th>
+      </thead>
+      <tbody>
+    {% for discussion in discussions_by_title %}
+    <tr>
+      <th scope="row">{{discussion.username}}</td>
+      <td><a href="{{url_for('discussions_show', discussion_id = discussion.id )}}">{{ discussion.title }}</a></td>
+      <td>
+        {% if current_user.is_authenticated and current_user.id == discussion.account_id %}
+        <form method="POST" action="{{ url_for('discussions_delete', discussion_id=discussion.id) }}">
+          <button type="submit" class="btn btn-warning">Delete</button>
         </form>
         {% endif %}
       </td>

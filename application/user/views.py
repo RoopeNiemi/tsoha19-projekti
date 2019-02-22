@@ -54,7 +54,6 @@ def update_password(user_id):
 
     form = UpdatePasswordForm(request.form)
     if not form.validate():
-        #TODO: use validators for better error messaging and validation
         return render_template("user/userpage.html", error = "Problem validating passwords. Make sure the new password is atleast 8 characters, and that given new passwords match.", 
         user=current_user, form = UpdatePasswordForm())
 
