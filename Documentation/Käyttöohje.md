@@ -2,8 +2,7 @@
 
 Ohjelman aiheena on keskustelufoorumi. Ei-kirjautunut käyttäjä voi selailla ja etsiä keskusteluja, ja näyttää yksittäisiä keskusteluja. 
 Sivulle mentäessä käyttäjä uudelleenohjataan keskustelujen listaus -sivulle. Yksittäiseen keskusteluun pääsee klikkaamalla hiirellä keskustelun
-otsikkoa. Keskusteluja pystyy etsimään listauksen yläpuolella olevan hakutoiminnon avulla. Haku tapahtuu keskusteluun liittyvän tagin perusteella: jokaisella
-keskustelulla on vähintään yksi tagi. Tageja ei näy listauksessa mutta ne näkyvät kun avaa yksittäisen keskustelun. 
+otsikkoa. Keskusteluja pystyy etsimään listauksen yläpuolella olevan hakutoiminnon avulla. Haku tapahtuu keskusteluun liittyvän tagin tai keskustelun otsikon perusteella. Tulokset listataan eri otsikoiden alle, tagin mukaan ja otsikon mukaan. Tageja ei näy listauksessa mutta ne näkyvät kun avaa yksittäisen keskustelun. 
 
 
 Uuden käyttäjän voi rekisteröidä oikeasta yläkulmasta Register nappia painamalla. Käyttäjänimen tulee olla vähintään 6 merkkiä pitkä ja salasanan
