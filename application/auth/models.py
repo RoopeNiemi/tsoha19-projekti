@@ -1,14 +1,10 @@
 from sqlalchemy.ext.hybrid import hybrid_property
 import bcrypt
 from application import db
+from application.models import Base
 
-class User(db.Model):
+class User(Base):
     __tablename__ = "account"
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), 
-    onupdate=db.func.current_timestamp(), nullable=False)
 
     username=db.Column(db.String(144), nullable=False, unique=True)
     _password=db.Column(db.String(144), nullable=False)

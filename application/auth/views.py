@@ -42,10 +42,12 @@ def auth_register():
     form = CreateUserNamePasswordForm(request.form)
     if not form.validate():
         return render_template("auth/registerform.html", error = "Username must be atleast 6 characters. Password must be atleast 8 characters. Passwords must match.", form=CreateUserNamePasswordForm())
-    try:
+
+    user_exists=User.query.filter_by(username=form.username.data).first()
+    if not user_exists:    
         user = User(username=form.username.data, password = bcrypt.hashpw(form.password.data.encode('utf8'), bcrypt.gensalt()).decode('utf8'))
         db.session().add(user)
         db.session().commit()
         return render_template("auth/loginform.html", form = UsernameAndPasswordForm())
-    except:
-        return render_template("auth/registerform.html", form = CreateUserNamePasswordForm(), error = "Username already exists, please choose another one")
+    else:
+        return render_template("auth/registerform.html", form = CreateUserNamePasswordForm(), error = "Username already exists, please choose another one")        

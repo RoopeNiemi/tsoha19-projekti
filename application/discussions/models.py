@@ -1,4 +1,5 @@
 from application import db
+from application.models import Base
 from datetime import datetime
 from sqlalchemy import Table, Integer, ForeignKey, Column
 
@@ -7,13 +8,9 @@ discussion_tag = Table('discussion_tag', db.Model.metadata,
     Column('tag_id', Integer, ForeignKey('tag.id')))
 
 
-class Discussion(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp(), nullable=False)
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(), 
-    onupdate=db.func.current_timestamp(), nullable=False)
+class Discussion(Base):
 
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
     messages = db.relationship("Message", backref='discussion', cascade='all',lazy=True)
     tags = db.relationship("Tag", cascade='all',secondary=discussion_tag, backref='discussions', lazy=True)

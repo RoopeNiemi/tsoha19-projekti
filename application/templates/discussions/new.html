@@ -6,13 +6,13 @@
 <form method="POST" action="{{ url_for('discussions_create') }}">
 
   <div class="form-group">
-      <label for="title">Max 100 characters</label>
+      <label for="title">5-100 characters</label>
       <input type="text" class="form-control" id="title" name="title" placeholder="Title">
         <br>
-      <label for="tags">Max 200 characters. Tags are separated by space</label>
+      <label for="tags">3-200 characters. You can add multiple tags. Tags are separated by space</label>
       <input type="text" class="form-control" id="tags" name="tags" placeholder="Tags">
   <br>
-  <label for="repeat_new_password">Max 2000 characters</label>
+  <label for="repeat_new_password">5-2000 characters</label>
   <textarea class="form-control" id="content" name="content" rows="5"></textarea>
 <br>
 </div>

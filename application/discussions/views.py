@@ -41,6 +41,7 @@ def discussions_create():
         return render_template("discussions/new.html", form=DiscussionForm(), error = "Title length must be between 5 and 100 characters. Content must be between 5 and 2000 characters.")
     discussion = Discussion(form.title.data)
     discussion.set_account_id(current_user.id)
+    #Tags are separated by whitespace, split them into array and append them to discussion separately.
     discussion_tags=form.tags.data.split(' ')
     for tagname in discussion_tags:
         # Check for empty strings
@@ -83,10 +84,7 @@ def discussions_show(discussion_id):
             "AND tag.id = discussion_tag.tag_id "
             "AND discussion_id= :id").params(id = discussion_id)
     tags = db.engine.execute(stmt)
-
-    #print(str(comment))
-    #discussion = Discussion.query.get(discussion_id)
-    #messages = discussion.messages
+    
     return render_template("discussions/discussion.html", comments=comments, discussion=discussion, form = CommentForm(), tags=tags)
 
 
@@ -125,8 +123,6 @@ def discussions_delete(discussion_id):
     db.engine.execute(stmt)
 
     # Delete discussion
-
-    #TODO: When tags exist, delete them here
 
     db.session().delete(discussion)
     db.session().commit()
