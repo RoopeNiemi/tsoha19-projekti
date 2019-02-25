@@ -31,3 +31,7 @@ Testattaessa ohjelmaa voi myös rekisteröidä uuden käyttäjän ja kirjautua s
 [User stories](https://github.com/RoopeNiemi/tsoha19-projekti/blob/master/Documentation/Userstories.md)
 
 [Tietokantakaavio](https://github.com/RoopeNiemi/tsoha19-projekti/blob/master/Documentation/databaseschema.md)
+
+[Käyttöohje](https://github.com/RoopeNiemi/tsoha19-projekti/blob/master/Documentation/K%C3%A4ytt%C3%B6ohje.md)
+
+[Asennusohje](https://github.com/RoopeNiemi/tsoha19-projekti/blob/master/Documentation/Asennusohje.md)
