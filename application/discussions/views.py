@@ -72,7 +72,8 @@ def discussions_show(discussion_id):
                 "Message.account_id as a_id, Message.id as m_id "
                 "FROM Account, Message, Discussion WHERE Account.id = Message.account_id "
                 "AND Discussion.id = Message.discussion_id " 
-                "AND Discussion.id = :id").params(id = discussion_id)
+                "AND Discussion.id = :id "
+                "ORDER BY Message.date_created").params(id = discussion_id)
 
     comments = db.engine.execute(stmt)
     stmt = text("SELECT Discussion.id AS id, Discussion.title as title, Discussion.date_created as date_created "
