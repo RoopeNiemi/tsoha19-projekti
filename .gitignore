@@ -6,3 +6,8 @@ application/tags/__pycache__
 venv
 application/forum.db
 application/user/__pycache__
+*__pycache__
+build/
+dist/
+.vscode
+*.egg-info
